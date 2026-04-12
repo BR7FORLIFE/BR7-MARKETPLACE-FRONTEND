@@ -6,7 +6,7 @@ interface Props{
     children: React.ReactNode
 }
 
-function ContentLayout({title, children}: Props){
+function ContentLayout({ children }: Props){
 
     return (
         <section className='w-full h-full flex flex-col justify-between items-center'>

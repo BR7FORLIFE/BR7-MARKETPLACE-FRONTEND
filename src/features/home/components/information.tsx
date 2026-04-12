@@ -7,7 +7,6 @@ interface InformationProps{
 
 function AnnounceCard(
     {
-        img, 
         title, 
         description, 
         styles
