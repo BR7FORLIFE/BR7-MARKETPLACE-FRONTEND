@@ -4,8 +4,8 @@ import {
     type Login,
     type Register,
     type RegisterResponse,
-} from "./schemas/auth/AuthSchema";
-import { api, API_ENDPOINTS } from "./apiEndpoints";
+} from "./schemas/auth/auth-schema";
+import { api, API_ENDPOINTS } from "./api-endpoints";
 
 export const registerFetch = async (params: Register) => {
     try {
