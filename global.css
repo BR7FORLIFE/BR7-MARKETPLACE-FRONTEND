@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'saira';
+    src: url('public/fonts/saira-variable.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'inter-variable';
+    src: url('public/fonts/inter-variable.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@theme{
+    --font-saira: 'saira', sans-serif; 
+    --font-inter: 'inter-variable', sans-serif;
+}
