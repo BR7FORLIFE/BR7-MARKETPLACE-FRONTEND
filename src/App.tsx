@@ -1,5 +1,5 @@
-import AppRouter from "./routes/router.tsx"
-import AppProvider from './routes/provider.tsx'
+import AppRouter from "./app/routes/router.tsx"
+import AppProvider from './app/routes/provider.tsx'
 function App() {
   
   return (
