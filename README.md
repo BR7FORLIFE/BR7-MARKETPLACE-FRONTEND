@@ -23,14 +23,17 @@ Estructura basada en separación por responsabilidades:
 
 ```bash
 src/
-│
-├── api/ → llamadas HTTP (axios / fetch)
-├── components/ → componentes reutilizables
-├── features/ → lógica por dominio (listings, auth, etc)
-├── hooks/ → custom hooks
-├── pages/ → vistas principales
-├── store/ → estado global
-└── utils/ → helpers
+ ├── app/        → configuración global
+ ├── assets/     → imágenes, fonts
+ ├── components/ → UI reutilizable
+ ├── features/   → lógica por dominio
+ ├── hooks/      → hooks custom
+ ├── i18n/       → traducciones
+ ├── lib/        → integraciones externas
+ ├── testing/    → mocks/tests
+ ├── types/      → tipos globales
+ └── utils/      → helpers
+
 ```
 
 ---

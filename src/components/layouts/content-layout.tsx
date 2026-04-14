@@ -1,5 +1,5 @@
-import Footer from '../UI/global/footer';
-import { Header } from '../UI/global/header-nav'
+import Footer from '@components/UI/global/footer';
+import { Header } from '@components/UI/global/header-nav'
 
 interface Props{
     title: string,
@@ -9,9 +9,9 @@ interface Props{
 function ContentLayout({ children }: Props){
 
     return (
-        <section className='w-full h-full flex flex-col justify-between items-center'>
+        <section className='w-full min-h-screen flex flex-col justify-between items-center'>
             <Header/>
-            <main className='w-full h-full'>
+            <main className='w-full flex-1'>
                 {children}
             </main>
             <Footer/>
