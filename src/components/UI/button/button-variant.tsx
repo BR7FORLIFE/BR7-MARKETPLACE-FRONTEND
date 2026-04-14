@@ -1,24 +1,65 @@
-interface Props{
-    title?: string,
-    icon?: React.ReactNode,
-    onclick: () => void
-    className?: string
+import type{ Styles} from '@customtypes/styles'
+
+type IconsParams = {
+  icon?: React.ReactNode;
+} & Partial<Styles>
+
+interface Props extends Styles {
+  children?: React.ReactNode;
+  title?: string;
+  iconParams?: IconsParams;
+  onclick: () => void;
+  backgroundColor?: string;
+  color?: string;
 }
 
-function Button({
-    title, 
-    icon,
-    onclick,
-    className
-}: Props){
-    if(!title && !icon) return null;
+const Button = ({
+  children,
+  onclick,
+  width = "auto",
+  height = "auto",
+  backgroundColor,
+  iconParams,
+  color,
+  className,
+}: Props) => {
+  return (
+    <button
+      onClick={onclick}
+      style={{ width, height, backgroundColor, color }}
+      className={`${iconParams?.className || ""} ${className || ""}`}
+    >
+      {children}
+    </button>
+  );
+};
 
-    return (
-        <button onClick={onclick} className={className}>
-            {icon && <span>{icon}</span>}
-            {title && <span>{title}</span>}
-        </button>
-    )
+function ButtonVariants({ iconParams, title, ...rest }: Props) {
+  const hasIcon = !!iconParams?.icon;
+  const hasTitle = !!title;
+
+  if (!hasIcon && !hasTitle) return null;
+
+  const align = iconParams?.align || "center";
+
+  const content = (
+    <div
+      className={`flex ${
+        align === "left"
+          ? "flex-row"
+          : align === "right"
+            ? "flex-row-reverse"
+            : align === "bottom"
+              ? "flex-col-reverse"
+              : "flex-col items-center"
+      }`}
+    >
+      {hasIcon && <span>{iconParams!.icon}</span>}
+      {hasTitle && <span>{title}</span>}
+    </div>
+  );
+
+  return <Button {...rest}>{content}</Button>;
 }
 
-export { Button }
+export default ButtonVariants;
