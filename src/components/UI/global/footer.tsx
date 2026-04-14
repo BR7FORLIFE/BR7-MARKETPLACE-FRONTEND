@@ -1,5 +1,5 @@
 import { HeaderTitle } from "./header-nav"
-import { type Link as LinkType } from "../../../types/Link"
+import { type Link as LinkType } from "@customtypes/Link"
 
 import { MdOutlineWeb } from 'react-icons/md'
 import { FaShareAlt } from 'react-icons/fa'
