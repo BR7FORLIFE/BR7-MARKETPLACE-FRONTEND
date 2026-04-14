@@ -1,7 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 
 function AuthLayout({
-  title,
   children,
 }: {
   title: string;
