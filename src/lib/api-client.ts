@@ -1,6 +1,8 @@
 import {
     registerResponseSchema,
     loginResponseSchema,
+    meSchema,
+    type Me,
     type Login,
     type Register,
     type RegisterResponse,
@@ -25,5 +27,14 @@ export const loginFetch = async (params: Login) => {
         return loginResponseSchema.parse(data);
     } catch (error) {
         throw new Error("Error to apply the login!");
+    }
+};
+
+export const meFetch = async () => {
+    try {
+        const { data } = await api.get<Me>(API_ENDPOINTS.AUTH.ME);
+        return meSchema.parse(data);
+    } catch (error) {
+        throw new Error("Error to get the current user!");
     }
 };
