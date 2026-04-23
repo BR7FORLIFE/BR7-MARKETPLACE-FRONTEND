@@ -2,6 +2,8 @@ import { MdOutlineTranslate, MdMenu } from "react-icons/md";
 import { AiFillShopping } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 
+import { useAuth } from "@context/AuthContext";
+
 import ButtonVariant from "@components/UI/button/button-variant.tsx";
 import type { Link as LinkType } from "src/custom-types/Link";
 
@@ -37,57 +39,63 @@ const HeaderTitle = ({ style }: { style: string }) => (
 );
 
 function Header() {
-  let isAuthenticated = true;
+  const { isAuthenticated } = useAuth();
+
   const BUTTON_SIZE = "size-5 md:size-7";
 
   return (
     <header className="relative w-full h-12 flex justify-around items-center text-black">
       <div className="flex gap-2 justify-center items-center">
-        <ButtonVariant
-          onclick={() => null}
-          iconParams={{
-            icon: <MdMenu className="size-6" />,
-          }}
-          className="block md:hidden"
-        />
+        {isAuthenticated && (
+          <ButtonVariant
+            onclick={() => null}
+            iconParams={{
+              icon: <MdMenu className="size-6" />,
+            }}
+            className="block md:hidden"
+          />
+        )}
         <HeaderTitle style="text-black" />
       </div>
       {isAuthenticated && (
-        <nav className="hidden md:block">
-          <ul className="font-inter font-medium flex gap-12">
-            {links.map(({ name, path }) => {
-              return (
-                <Link key={name} className={LINK_STYLE} to={path}>
-                  {name}
-                </Link>
-              );
-            })}
-          </ul>
-        </nav>
+        <>
+          <nav className="hidden md:block">
+            <ul className="font-inter font-medium flex gap-12">
+              {links.map(({ name, path }) => {
+                return (
+                  <Link key={name} className={LINK_STYLE} to={path}>
+                    {name}
+                  </Link>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="flex gap-4">
+            <ButtonVariant
+              onclick={() => null}
+              iconParams={{
+                icon: <MdOutlineTranslate className={BUTTON_SIZE} />,
+              }}
+              className="cursor-pointer"
+            />
+            <ButtonVariant
+              onclick={() => null}
+              iconParams={{
+                icon: <AiFillShopping className={BUTTON_SIZE} />,
+              }}
+              className="cursor-pointer"
+            />
+            <ButtonVariant
+              onclick={() => null}
+              iconParams={{
+                icon: <CgProfile className={BUTTON_SIZE} />,
+              }}
+              className="cursor-pointer"
+            />
+          </div>
+        </>
       )}
-      <div className="flex gap-4">
-        <ButtonVariant
-          onclick={() => null}
-          iconParams={{
-            icon: <MdOutlineTranslate className={BUTTON_SIZE} />,
-          }}
-          className="cursor-pointer"
-        />
-        <ButtonVariant
-          onclick={() => null}
-          iconParams={{
-            icon: <AiFillShopping className={BUTTON_SIZE} />,
-          }}
-          className="cursor-pointer"
-        />
-        <ButtonVariant
-          onclick={() => null}
-          iconParams={{
-            icon: <CgProfile className={BUTTON_SIZE} />,
-          }}
-          className="cursor-pointer"
-        />
-      </div>
     </header>
   );
 }
