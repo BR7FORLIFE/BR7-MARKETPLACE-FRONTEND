@@ -18,7 +18,8 @@
       "@types/*": ["src/custom-types/*"],
       "@utils/*": ["src/utils/*"],
       "@config/*": ["src/config/*"],
-      "@routes/*": ["src/routes/*"]
+      "@routes/*": ["src/routes/*"],
+      "@context/*": ["src/context/*"]
     }
   }
 }
