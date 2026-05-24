@@ -30,10 +30,18 @@ const links: LinkType[] = [
 const LINK_STYLE =
   "relative text-sm tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full";
 
-const HeaderTitle = ({ style }: { style: string }) => (
-  <Link to="/">
+const HeaderTitle = ({
+  style,
+  title = "BR7 MARKETPLACE",
+  path = "/",
+}: {
+  style?: string;
+  title?: string;
+  path?: string;
+}) => (
+  <Link to={path}>
     <h1 className={`text-sm md:text-xl font-saira font-bold ${style}`}>
-      BR7-MARKETPLACE
+      {title}
     </h1>
   </Link>
 );
@@ -48,14 +56,14 @@ function Header() {
       <div className="flex gap-2 justify-center items-center">
         {isAuthenticated && (
           <ButtonVariant
-            onclick={() => null}
+            onClick={() => null}
             iconParams={{
               icon: <MdMenu className="size-6" />,
             }}
             className="block md:hidden"
           />
         )}
-        <HeaderTitle style="text-black" />
+        <HeaderTitle title="BR7 MARKETPLACE" style="text-black" />
       </div>
       {isAuthenticated && (
         <>
@@ -73,21 +81,21 @@ function Header() {
 
           <div className="flex gap-4">
             <ButtonVariant
-              onclick={() => null}
+              onClick={() => null}
               iconParams={{
                 icon: <MdOutlineTranslate className={BUTTON_SIZE} />,
               }}
               className="cursor-pointer"
             />
             <ButtonVariant
-              onclick={() => null}
+              onClick={() => null}
               iconParams={{
                 icon: <AiFillShopping className={BUTTON_SIZE} />,
               }}
               className="cursor-pointer"
             />
             <ButtonVariant
-              onclick={() => null}
+              onClick={() => null}
               iconParams={{
                 icon: <CgProfile className={BUTTON_SIZE} />,
               }}

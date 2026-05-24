@@ -6,26 +6,30 @@ type IconsParams = {
 
 interface Props extends Styles {
   children?: React.ReactNode;
-  title?: string;
+  title?: string | React.ReactNode;
   iconParams?: IconsParams;
-  onclick: () => void;
+  onClick: () => void;
   backgroundColor?: string;
   color?: string;
+  disabled?: boolean
 }
 
 const Button = ({
   children,
-  onclick,
+  onClick,
   width = "auto",
   height = "auto",
   backgroundColor,
   iconParams,
   color,
   className,
+  disabled
 }: Props) => {
   return (
     <button
-      onClick={onclick}
+      disabled={disabled}
+      type='button'
+      onClick={onClick}
       style={{ width, height, backgroundColor, color }}
       className={`${iconParams?.className || ""} ${className || ""}`}
     >

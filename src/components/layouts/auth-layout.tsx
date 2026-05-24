@@ -1,4 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
 import { Header } from '@components/UI/global/header-nav'
 
 function AuthLayout({
@@ -8,10 +7,10 @@ function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Fragment>
+    <section className="w-screen h-full flex flex-col">
       <Header/>
-      <main>{children}</main>
-    </Fragment>
+      <main className="flex h-full justify-center">{children}</main>
+    </section>
   );
 }
 
