@@ -5,8 +5,11 @@ import shoes from "@assets/landing/shoes.jpg";
 import ButtonVariant from "@components/UI/button/button-variant";
 import { Herobanner } from "@components/blocks/Hero";
 import { JoinCard } from "@components/blocks/PromoCard";
+import { useNavigate } from "react-router";
 
 function LandingRoute() {
+  const navigate = useNavigate()
+
   return (
     <ContentLayout title="Home">
       <section className="mx-12 my-6">
@@ -20,7 +23,7 @@ function LandingRoute() {
                 brutalist design for the modern wardrobe"
               component={
                 <ButtonVariant
-                  onclick={() => null}
+                  onClick={() => null}
                   title="DISCOVER COLECCTION"
                   width={250}
                   height={60}
@@ -38,13 +41,13 @@ function LandingRoute() {
               description="BY JOINING YOU AGREE TO OUR PRIVATE TERMS AND EDITORIAL PROTOCOLS."
               component={[
                 <ButtonVariant
-                  onclick={() => null}
+                  onClick={() => navigate("/auth/login")}
                   className="px-4 py-2 font-inter font-semibold cursor-pointer bg-white transition-colors duration-300 ease-in-out hover:bg-neutral-300"
                   title="LOGIN TO PROFILE"
                   color="black"
                 />,
                 <ButtonVariant
-                  onclick={() => null}
+                  onClick={() => navigate("/auth/register")}
                   className="border border-white px-4 py-2 font-medium cursor-pointer bg-black transition-colors duration-300 ease-in-out hover:bg-white hover:text-black"
                   title="CREATE ACCOUNT"
                 />,
