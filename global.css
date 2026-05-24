@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tailwind-animations";
 
+
 @font-face {
     font-family: 'saira';
     src: url('public/fonts/saira-variable.ttf') format('truetype');
