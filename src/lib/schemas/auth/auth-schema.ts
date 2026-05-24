@@ -20,7 +20,7 @@ export const meSchema = z.object({
 
 //responses
 export const registerResponseSchema = z.object({
-    userId: z.uuid(),
+    user_id: z.uuid(),
     username: z.string().min(4),
 });
 

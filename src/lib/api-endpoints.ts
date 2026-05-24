@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: import.meta.env.SPRING_DEFAULT_PATH_LOCAL,
+    baseURL: import.meta.env.VITE_SPRING_DEFAULT_PATH_LOCAL,
     headers: {
         "Content-Type": "application/json",
     },
+    withCredentials: true,
 });
 
 export const API_ENDPOINTS = {
