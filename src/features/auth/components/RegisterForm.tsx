@@ -17,10 +17,18 @@ import {
   SuccessAlert,
   WarningAlert,
 } from "../../../components/UI/notifications/notifications";
+import { toast } from "sonner";
 
-function RegisterForm({ verifyFn }: {verifyFn: React.Dispatch<React.SetStateAction<boolean>>}) {
+function RegisterForm({
+  verifyFn,
+}: {
+  verifyFn: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const mutation = useMutation({
     mutationFn: registerFetch,
+    onError() {
+      toast.error("Dicho usuario ya posee una cuenta registrada!, Inicie sesion en cambio");
+    },
   });
   const { setUser } = useAuthStore();
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -44,7 +52,7 @@ function RegisterForm({ verifyFn }: {verifyFn: React.Dispatch<React.SetStateActi
       password: "",
     });
 
-    verifyFn(true)
+    verifyFn(true);
 
     setRepeatPassword("");
   };
@@ -52,12 +60,12 @@ function RegisterForm({ verifyFn }: {verifyFn: React.Dispatch<React.SetStateActi
   const passwordsMatch = repeatPassword === info.password;
 
   return (
-    <section className="bg-neutral-100 w-1/3 flex flex-col justify-around items-center rounded-lg">
+    <section className="bg-neutral-100 w-2/3 flex flex-col justify-around items-center rounded-lg">
       <div className="relative flex flex-col group">
         <HeaderTitle title="CREATE ACCOUNT" />
         <span className="w-full border-b-2 transition-all duration-300 ease-in group-hover:w-1/2"></span>
       </div>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4 w-2/3">
         <Input
           id="username"
           title="username"
@@ -91,7 +99,13 @@ function RegisterForm({ verifyFn }: {verifyFn: React.Dispatch<React.SetStateActi
         />
 
         <ButtonVariant
-          title={mutation.isPending ? <CircleLoader color="white" size={20} /> : "INITIALIZE ACCOUNT"}
+          title={
+            mutation.isPending ? (
+              <CircleLoader color="white" size={20} />
+            ) : (
+              "INITIALIZE ACCOUNT"
+            )
+          }
           onClick={submitRegisterForm}
           backgroundColor="black"
           color="white"
