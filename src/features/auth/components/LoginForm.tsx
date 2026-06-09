@@ -1,0 +1,91 @@
+import { Link } from "react-router";
+import ButtonVariants from "../../../components/UI/button/button-variant";
+import { HeaderTitle } from "../../../components/UI/global/header-nav";
+import Input from "../../../components/UI/input/Input-form";
+import { useState } from "react";
+import type { Login } from "../../../lib/schemas/auth/auth-schema";
+import { useMutation } from "@tanstack/react-query";
+import { loginFetch } from "../../../lib/api-client";
+import { CircleLoader } from "react-spinners";
+import { useAuthStore } from "../../../stores/auth-store";
+
+function LoginForm() {
+  const { setAccessToken } = useAuthStore();
+
+  const [info, setInfo] = useState<Login>({
+    password: "",
+    email: "",
+  });
+
+  const mutation = useMutation({
+    mutationFn: loginFetch,
+    mutationKey: ["login"],
+    onError: () => {},
+  });
+
+  const handleUserInfo = (id: string, value: string) => {
+    setInfo((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const submitLoginForm = async () => {
+    const { access_token } = await mutation.mutateAsync(info);
+
+    setAccessToken(access_token);
+
+    
+  };
+
+  return (
+    <section className="bg-neutral-100 w-1/3 flex flex-col justify-center items-center rounded-lg gap-6">
+      <div className="relative flex flex-col group">
+        <HeaderTitle title="Login" />
+        <span className="w-full border-b-2 transition-all duration-300 ease-in group-hover:w-1/2"></span>
+      </div>
+      <form className="flex flex-col gap-4 w-2/3">
+        <Input
+          id="email"
+          title="email"
+          typeInput="email"
+          value={""}
+          onChange={handleUserInfo}
+        />
+
+        <Input
+          id="password"
+          title="password"
+          typeInput="password"
+          value={""}
+          onChange={handleUserInfo}
+        />
+
+        <ButtonVariants
+          title={
+            mutation.isPending ? (
+              <CircleLoader color="white" size={20} />
+            ) : (
+              "INITIALIZE ACCOUNT"
+            )
+          }
+          onClick={submitLoginForm}
+          backgroundColor="black"
+          color="white"
+          className="p-3 rounded-lg"
+          disabled={mutation.isPending}
+        />
+      </form>
+
+      <div className="inline-flex flex-col text-sm text-center gap-2">
+        <div className="group flex flex-col items-center">
+          <Link to="/auth/login">ALREADY REGISTERED?</Link>
+          <span className="mt-1 h-0.5 w-0 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
+        </div>
+        <div className="group flex flex-col items-center">
+          <Link to="">PRIVACY POLICY</Link>
+          <span className="mt-1 h-0.5 w-0 bg-black transition-all duration-300 ease-in-out group-hover:w-full"></span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export { LoginForm };
