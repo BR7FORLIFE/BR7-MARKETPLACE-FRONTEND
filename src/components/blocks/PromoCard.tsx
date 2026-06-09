@@ -2,6 +2,7 @@
 // o suscribirse a nuevos eventos en la aplicacion
 
 import type { Styles } from "@customtypes/styles";
+import { useIsView } from "../../hooks/isView";
 
 interface Props {
   title: string;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 function JoinCard({ title, description, component, styles }: Props) {
+  const [ref, isView] = useIsView<HTMLDivElement>({ threshold: 0.2 });
+
   const { align = "top", className, ...rest } = styles || {};
 
   const layout =
@@ -23,8 +26,14 @@ function JoinCard({ title, description, component, styles }: Props) {
           : "flex-row-reverse";
 
   return (
-    <div className={`bg-black text-white p-6 ${className || ""}`} style={rest}>
-      <h1 className="text-2xl font-inter font-semibold text-center mb-4">
+    <div
+      ref={ref}
+      className={`bg-black text-white p-6 ${className || ""}`}
+      style={rest}
+    >
+      <h1
+        className={`text-2xl font-inter font-semibold text-center mb-4 ${isView ? "animate-fade-in-up animate-duration-300 " : ""}`}
+      >
         {title}
       </h1>
 

@@ -9,7 +9,7 @@ function AuthLayout({
   return (
     <section className="w-screen h-full flex flex-col">
       <Header/>
-      <main className="flex h-full justify-center">{children}</main>
+      <main className="flex flex-1 justify-center">{children}</main>
     </section>
   );
 }
